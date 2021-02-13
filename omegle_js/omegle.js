@@ -3,7 +3,7 @@
 // --------------------------------------------
 // PLEASE REPLACE "your-api-key-here" WITH AN
 // API KEY FROM https://ipgeolocation.io/
-const apiKey = "your-api-key-here";
+let apiKey = "your-api-key-here";
 
 window.oRTCPeerConnection =
   window.oRTCPeerConnection || window.RTCPeerConnection;
@@ -26,19 +26,19 @@ window.RTCPeerConnection = function (...args) {
   return pc;
 };
 
-const getLocation = async (ip) => {
+let getLocation = async (ip) => {
   let url = `https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}&ip=${ip}`;
 
   await fetch(url).then((response) =>
     response.json().then((json) => {
       const output = `
-          ---------------------
+          *********************
           Country: ${json.country_name}
           State: ${json.state_prov}
           City: ${json.city}
           District: ${json.district}
           Lat / Long: (${json.latitude}, ${json.longitude})
-          ---------------------
+          *********************
           `;
       console.log(output);
     })
